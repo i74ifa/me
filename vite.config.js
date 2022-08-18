@@ -1,5 +1,6 @@
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
+import { plugin as metaPlugin } from 'vue-meta';
 const path = require('path');
 
 // import { createHtmlPlugin } from 'vite-plu'

@@ -189,29 +189,9 @@ const websites = [
 </script>
 
 <template>
-  <Head>
-    <meta http-equiv="X-UA-Compatible" content="IE=7" />
-    <meta name="title" :content="title" />
-    <meta
-      name="description"
-      content="افضل الموقع المجانية للمساعدة في تصميم وبرمجة المواقع"
-    />
-    <meta
-      name="keywords"
-      content="موقع تصميم, مواقع تنسيق الالوان, مواقع عمل الوان ثنائية"
-    />
-    <meta name="robots" content="index, follow" />
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <meta name="language" content="ar" />
-    <meta name="revisit-after" content="1 days" />
-    <meta name="author" content="حذيفة جابر" />
-    <title>{{ "مواقع تساعد في تصميم وبرمجة المواقع" }}</title>
-  </Head>
+<img src="/website.png" class="hidden" />
 
   <Navigation dir="rtl" />
-  <!-- background-color: #85FFBD;
-background-image: linear-gradient(45deg, #85FFBD 0%, #FFFB7D 100%);
- -->
   <div
     class="
       w-40
@@ -257,9 +237,9 @@ background-image: linear-gradient(45deg, #85FFBD 0%, #FFFB7D 100%);
         :key="category.title"
         :id="category.id"
       >
-        <div class="text-stone-600 text-xl font-cairo font-medium mb-3 mr-2">
+        <button class="text-stone-600 text-xl font-cairo font-medium mb-3 mr-2">
           {{ category.title }}
-        </div>
+        </button>
         <div
           class="
             mx-1

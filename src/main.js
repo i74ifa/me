@@ -1,14 +1,19 @@
 import { createApp } from 'vue'
 // import VueRouter from 'vue-router';
 
-
+import './app.css';
 
 import router from './router.js';
 import RootElement from './App.vue'
+import { createMetaManager } from 'vue-meta'
 
+
+// const metaManager = createMetaManager();
 
 const app = createApp(RootElement)
-// const appName = window.document.getElementsByTagName('title')[0]?.innerText || 'حذيفة جابر';
+app.use(router)
+app.use(createMetaManager())
+// app.use(metaPlugin)
 
 app.config.globalProperties.$router = router
 app.config.globalProperties.$page = {
@@ -18,11 +23,10 @@ app.config.globalProperties.$page = {
     }
 };
 
-app.use(router)
+
+await router.isReady()
 app.mount('#app')
 
 
 
 
-
-import './app.css';
