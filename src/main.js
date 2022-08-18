@@ -5,14 +5,8 @@ import './app.css';
 
 import router from './router.js';
 import RootElement from './App.vue'
-import { createMetaManager } from 'vue-meta'
-
-
-// const metaManager = createMetaManager();
 
 const app = createApp(RootElement)
-app.use(router)
-app.use(createMetaManager())
 // app.use(metaPlugin)
 
 app.config.globalProperties.$router = router
@@ -24,7 +18,7 @@ app.config.globalProperties.$page = {
 };
 
 
-await router.isReady()
+app.use(router);
 app.mount('#app')
 
 
