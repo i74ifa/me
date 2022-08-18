@@ -8,6 +8,9 @@ const path = require('path');
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [vue()],
+  build: {
+    target: 'esnext'
+  },
   server: {
     host: '0.0.0.0'
   },
