@@ -45,17 +45,17 @@ const router = createRouter({
 
 
 
-// router.beforeEach((to, from, next) => {
-//     // console.log(to.meta);
-//     document.title = `${data.aboutMe.name} - ${to.meta.title}`
-//     for (const [key, value] of Object.entries(to.meta.meta)) {
-//         let meta = document.createElement('meta');
-//         meta.name = key;
-//         meta.content = value
-//         document.head.appendChild(meta)
-//     }
+router.beforeEach((to, from, next) => {
+    // console.log(to.meta);
+    document.title = `${data.aboutMe.name} - ${to.meta.title}`
+    for (const [key, value] of Object.entries(to.meta.meta)) {
+        let meta = document.createElement('meta');
+        meta.name = key;
+        meta.content = value
+        document.head.appendChild(meta)
+    }
     
-//     return next()
-// })
+    return next()
+})
 
 export default router;
