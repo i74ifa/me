@@ -18,7 +18,7 @@ body {
 }
 @layer components {
     body {
-        @apply bg-[#ededed];
+        @apply bg-[#f3f4fd];
     }
     .badge {
         @apply font-vaizir px-2 py-1;
@@ -40,8 +40,8 @@ body {
         @apply max-w-2xl h-screen mx-auto px-3 md:px-0
     }
     .card {
-        @apply w-full bg-[#f9f9f9] text-gray-800 md:w-[700px] shadow-2xl shadow-stone-300 py-7 px-5 rounded-3xl;
-        box-shadow: 15.92px 15.92px 54px #D6D8DC, -15.92px -15.92px 54px #FFFFFF;
+        @apply w-full bg-[#f9f9f9] text-gray-800 md:w-[700px] shadow-stone-300 py-7 px-5 rounded-3xl;
+        box-shadow: 5.92px 5.92px 34px #D6D8DC, -15.92px -15.92px 54px #FFFFFF;
         /* box-shadow:  -34px 34px 64px #dfdfdf,
         34px 34px 64px #e5e5e5; */
     }
@@ -49,4 +49,31 @@ body {
     .title {
         @apply text-xl md:text-2xl font-cairo font-bold text-stone-600 border-b pb-1;
     }
+}
+
+svg {
+    pointer-events: none;
+}
+
+.open-buttons .button-account {
+    transition: all .5s cubic-bezier(0.76, 0, 0.24, 1);
+}
+.close-buttons .button-account {
+    transition: all .5s cubic-bezier(0.76, 0, 0.24, 1);
+}
+
+.close-buttons .button-account:first-child {
+    @apply translate-y-20;
+}
+
+.close-buttons .button-account:nth-child(2) {
+    @apply translate-y-10;
+}
+
+.open-buttons .button-account:first-child {
+    @apply -translate-y-2;
+}
+
+.open-buttons .button-account:nth-child(2) {
+    @apply -translate-y-1;
 }

@@ -1,8 +1,9 @@
 <script setup>
 import HeaderCard from "@/Components/Header-card.vue";
-import { computed, onMounted } from "@vue/runtime-core";
+import { computed, onMounted, ref } from "@vue/runtime-core";
 import LinuxIcon from "../Components/LinuxIcon.vue";
 import Navigation from "../Components/navigation.vue";
+import router from "../router";
 import data from './../data';
 
 const aboutMe = data.aboutMe;
@@ -16,17 +17,13 @@ const experiences = {
     'عمل ماهو مطلوب مني بحكم ان لدي خبرة في <span class="badge-green">html</span> <span class="badge-green">CSS</span>',
 };
 const accounts = { twitter: "تويتر", github: "قيت هُب", telegram: "تيليقرام" };
-const websites = {
-  icons: [
-    {
-      title: "Toools.design",
-      description:
-        "موقع كمرجعية للمصميم يمتلك كمية هائلة من المصادرة المفيدة للمصممين",
-      url: "https://www.toools.design/",
-    },
-  ],
-};
+const accountsUrl = {
+  telegram: 'https://t.me/i74ifa',
+  twitter: 'https://twitter.com/i74ifa',
+  github: 'https://github.com/i74ifa'
+}
 
+const isOpened = ref(false) 
 
 </script>
 
@@ -40,29 +37,22 @@ export default {
   },
   mounted() {
     this.app = computed(() => this.$page.props).value
+  },
+  methods: {
+    gotoAccount(event) {
+      if (!this.isOpened) { // return before opened
+        return;
+      }
+      const key = event.target.dataset.account
+      router.go(this.accountsUrl[key])
+      window.open("https://www.mozilla.org/", "mozillaTab");
+      // window.open(this.accountsUrl[key], '_blank');
+    }
   }
 }
 
 </script>
 <template>
-  <!-- <Head>
-    <meta http-equiv="X-UA-Compatible" content="IE=7" />
-    <meta name="title" :content="title" />
-    <meta
-      name="description"
-      content="مطور مواقع Full  Stack web developer بلغات البرمجة المتصدرة مثل php واطار laravel"
-    />
-    <meta
-      name="keywords"
-      content="Hothaifa, Hothaifa Jaber, i74ifa, حذيفة جابر"
-    />
-    <meta name="robots" content="index, follow" />
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <meta name="language" :content="lang" />
-    <meta name="revisit-after" content="1 days" />
-    <meta name="author" :content="name" />
-    <title>{{ title }}</title>
-  </Head> -->
   <Navigation :dir="app.dir" />
 
   <div class="renders-classes hidden badge-basic"></div>
@@ -147,139 +137,58 @@ export default {
         </div>
       </ul>
     </div>
-
-    <div class="card mt-5" :dir="app.dir">
-      <h3 class="title border-0">
-        {{ app.lang == "ar" ? "مواقع مفضلة" : "Fav Websites" }}
-      </h3>
-      <button
-        class="flex w-full text-right items-center font-cairo text-gray-600"
+    <div class="close-account-buttons fixed w-screen h-screen z-5 bg-transparent top-0 left-0" @click="isOpened = false" v-if="isOpened"></div>
+    <div @click="isOpened = true" class="fixed top-50 bottom-1 flex flex-col items-center close-buttons" :class="{'open-buttons': isOpened}">
+      <a href="https://twitter.com/i74ifa"
+        class="z-10 block p-3 button-account hover:scale-110 text-white bg-blue-500 rounded-full transition-all active:bg-green-50 focus:outline-none focus:ring"
+        :class="{'pointer-events-none': !isOpened}"
+        target="_blank"
       >
-        <div
-          class="
-            inline-block
-            h-8
-            w-8
-            bg-green-600
-            text-center
-            p-1.5
-            text-slate-50
-            rounded-lg
-          "
-        >
-          <svg
+      <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="currentColor"
-            viewBox="0 0 16 16"
-          >
-            <path
-              fill-rule="evenodd"
-              d="M12.493 13.368a7 7 0 1 1 2.489-4.858c.344.033.68.147.975.328a8 8 0 1 0-2.654 5.152 8.58 8.58 0 0 1-.81-.622Zm-3.731-3.22a13 13 0 0 0-1.107.318.5.5 0 1 1-.31-.95c.38-.125.802-.254 1.192-.343.37-.086.78-.153 1.103-.108.16.022.394.085.561.286.188.226.187.497.131.705a1.892 1.892 0 0 1-.31.593c-.077.107-.168.22-.275.343.107.124.199.24.276.347.142.197.256.397.31.595.055.208.056.479-.132.706-.168.2-.404.262-.563.284-.323.043-.733-.027-1.102-.113a14.87 14.87 0 0 1-1.191-.345.5.5 0 1 1 .31-.95c.371.12.761.24 1.109.321.176.041.325.069.446.084a5.609 5.609 0 0 0-.502-.584.5.5 0 0 1 .002-.695 5.52 5.52 0 0 0 .5-.577 4.465 4.465 0 0 0-.448.082Zm.766-.087-.003-.001-.003-.001c.004 0 .006.002.006.002Zm.002 1.867-.006.001a.038.038 0 0 1 .006-.002ZM6 8c.552 0 1-.672 1-1.5S6.552 5 6 5s-1 .672-1 1.5S5.448 8 6 8Zm2.757-.563a.5.5 0 0 0 .68-.194.934.934 0 0 1 .813-.493c.339 0 .645.19.813.493a.5.5 0 0 0 .874-.486A1.934 1.934 0 0 0 10.25 5.75c-.73 0-1.356.412-1.687 1.007a.5.5 0 0 0 .194.68ZM14 9.828c1.11-1.14 3.884.856 0 3.422-3.884-2.566-1.11-4.562 0-3.421Z"
-            />
-          </svg>
-        </div>
-        <div
-          class="
-            inline
-            mr-1
-            border-b
-            pr-1
-            border-t border-stone-200
-            w-full
-            py-2
-          "
-        >
-          ايقونات
-        </div>
-      </button>
-      <div
-        class="
-          font-vaizir
-          text-stone-500
-          font-medium
-          flex flex-wrap
-          gap-x-2
-          md:gap-4
-          gap-y-4
-          justify-center
-        "
-      >
-        <div
-          class="
-            py-4
-            rounded-2xl
-            hover:bg-stone-100
-            cursor-pointer
-            bg-white
-            w-52
-            shadow-2xl shadow-stone-200
-            px-5
-            text-center
-          "
-          v-for="website in websites.icons"
-          :key="website.title"
-        >
-          <a :href="website.url">
-            <h3 class="text-xl py-5 font-bold">
-              {{ website.title }}
-            </h3>
-            <p class="text-sm">{{ website.description }}</p>
-          </a>
-        </div>
-      </div>
-    </div>
-
-    <div class="card mt-5" :dir="app.dir" :class="app.dir == 'rtl' ? 'text-right' : ''">
-      <h3 class="title">{{ app.lang == "ar" ? "حِساباتي" : "My Account" }}</h3>
-      <ul
-        class="flex gap-x-3 text-gray-600 mt-3 flex-wrap text-sm md:text-base"
-      >
-        <a href="https://twitter.com/i74ifa" class="badge" target="_blank">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="16"
-            height="16"
-            fill="currentColor"
-            class="inline"
+            class="w-6 h-6"
             viewBox="0 0 16 16"
           >
             <path
               d="M5.026 15c6.038 0 9.341-5.003 9.341-9.334 0-.14 0-.282-.006-.422A6.685 6.685 0 0 0 16 3.542a6.658 6.658 0 0 1-1.889.518 3.301 3.301 0 0 0 1.447-1.817 6.533 6.533 0 0 1-2.087.793A3.286 3.286 0 0 0 7.875 6.03a9.325 9.325 0 0 1-6.767-3.429 3.289 3.289 0 0 0 1.018 4.382A3.323 3.323 0 0 1 .64 6.575v.045a3.288 3.288 0 0 0 2.632 3.218 3.203 3.203 0 0 1-.865.115 3.23 3.23 0 0 1-.614-.057 3.283 3.283 0 0 0 3.067 2.277A6.588 6.588 0 0 1 .78 13.58a6.32 6.32 0 0 1-.78-.045A9.344 9.344 0 0 0 5.026 15z"
             />
           </svg>
-          <span class="mr-0.5 ltr:ml-0.5">{{ accounts.twitter }}</span>
         </a>
-        <a href="https://github.com/i74ifa" class="badge">
-          <svg
+      <a href="https://t.me/i74ifa"
+        class="z-20 block p-3 text-white bg-[#0088cc] rounded-full transition-all button-account hover:scale-110 focus:outline-none focus:ring active:bg-red-50"
+        :class="{'pointer-events-none': !isOpened}"
+        target="_blank"
+      >
+      <span class="sr-only">تيليقرام</span>
+      <svg
             xmlns="http://www.w3.org/2000/svg"
-            width="16"
-            height="16"
             fill="currentColor"
-            class="inline"
-            viewBox="0 0 16 16"
-          >
-            <path
-              d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"
-            />
-          </svg>
-          <span class="mr-0.5 ltr:ml-0.5">{{ accounts.github }}</span>
-        </a>
-        <a href="https://t.me/i74ifa" class="badge">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="16"
-            height="16"
-            fill="currentColor"
-            class="inline"
+            class="w-6 h-6"
             viewBox="0 0 16 16"
           >
             <path
               d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.287 5.906c-.778.324-2.334.994-4.666 2.01-.378.15-.577.298-.595.442-.03.243.275.339.69.47l.175.055c.408.133.958.288 1.243.294.26.006.549-.1.868-.32 2.179-1.471 3.304-2.214 3.374-2.23.05-.012.12-.026.166.016.047.041.042.12.037.141-.03.129-1.227 1.241-1.846 1.817-.193.18-.33.307-.358.336a8.154 8.154 0 0 1-.188.186c-.38.366-.664.64.015 1.088.327.216.589.393.85.571.284.194.568.387.936.629.093.06.183.125.27.187.331.236.63.448.997.414.214-.02.435-.22.547-.82.265-1.417.786-4.486.906-5.751a1.426 1.426 0 0 0-.013-.315.337.337 0 0 0-.114-.217.526.526 0 0 0-.31-.093c-.3.005-.763.166-2.984 1.09z"
             />
           </svg>
-          <span class="mr-0.5 ltr:ml-0.5">{{ accounts.telegram }}</span>
+
         </a>
-      </ul>
+      <a href="https://github.com/i74ifa"
+        class="z-30 block p-3 button-account hover:scale-110 text-white bg-neutral-800 rounded-full transition-all active:bg-blue-50 focus:outline-none focus:ring"
+        :class="{'pointer-events-none': !isOpened}"
+        target="_blank"
+      >
+      <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="w-6 h-6"
+            fill="currentColor"
+            viewBox="0 0 16 16"
+          >
+            <path
+              d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"
+            />
+          </svg>
+        </a>
     </div>
     <div class="h-12"></div>
   </div>

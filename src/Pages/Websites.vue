@@ -45,7 +45,7 @@ const websites = [
         title: "Iconhub",
         description:
           "وهذا برضوا مفضل ثلاث مرات لديه اكثر من 14 الف ايقونة تستطيع استخدامها 😉",
-        url: "",
+        url: "https://iconhub.io/",
       },
       {
         title: "Icons Bootstrap",
@@ -69,13 +69,13 @@ const websites = [
         title: "ColorBox",
         description:
           "يمكنك من تنسيق الالوان بإستخدام الخوارزميات مع امكانية تصدير الالوان كـJSON",
-        url: "",
+        url: "https://colorbox.co.id/",
       },
       {
         title: "GradientArt",
         description:
           "موقع او اداة لإنشاء خليفية بلونين (Gradient) بأسلوب البرامج",
-        url: "",
+        url: "https://gra.dient.art/",
       },
       {
         title: "Gradient Backgrounds",
@@ -272,9 +272,6 @@ const websites = [
 
 
 <style>
-body {
-  background: #f2f2f2;
-}
 
 .card-website {
   @apply py-4 rounded-2xl hover:bg-white cursor-pointer px-5 text-center;
@@ -283,7 +280,7 @@ body {
   box-shadow: 10px 10px 25px #e1e1e19a, -10px -10px 25px #f9f9f99a;
 }
 
-@media (min-width: 756px) {
+@media (max-width: 756px) {
   body {
     background: #fafafa;
   }
